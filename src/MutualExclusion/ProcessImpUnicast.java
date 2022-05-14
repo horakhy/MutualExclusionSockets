@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import MutualExclusion.constants.StatusType;
 
-public class ProcessImp extends Thread {
+public class ProcessImpUnicast extends Thread {
   private final String IP = "230.0.0.0";
   private final int PORT = 4446;
   private final String MENSAGEM_SOLICITACAO_SC = "SOLICITA SC";
@@ -25,7 +25,7 @@ public class ProcessImp extends Thread {
   private int numeroProcessosQueAutorizaramAcessoSC = 0;
   private StatusType status;
 
-  public ProcessImp() {
+  public ProcessImpUnicast() {
     this.id = (UUID.randomUUID().getLeastSignificantBits() & Long.MAX_VALUE) % 10000;
     this.processosNaFilaDeEspera = new ArrayList<ProcessImp>();
     System.out.println("Processo " + this.id + " criado");
