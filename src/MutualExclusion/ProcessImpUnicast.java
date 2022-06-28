@@ -53,7 +53,7 @@ public class ProcessImpUnicast extends Thread {
     DatagramPacket packet = new DatagramPacket(message, message.length,
         InetAddress.getByName(IP), PORT);
     // send packet
-    this.socketUnicast.send(packet);
+    this.socketMulticast.send(packet);
   }
 
   public void notificarLiberacaoSC() throws IOException {
@@ -153,6 +153,6 @@ public class ProcessImpUnicast extends Thread {
 
   public void run() {
     handleMulticastSocket();
-    handleUnicastSocket();
+    // handleUnicastSocket();
   }
 }

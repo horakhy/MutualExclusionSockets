@@ -53,7 +53,7 @@ public class ProcessImp extends Thread {
     DatagramPacket packet = new DatagramPacket(message, message.length,
         InetAddress.getByName(IP), PORT);
     // send packet
-    this.socketUnicast.send(packet);
+    this.socketMulticast.send(packet);
   }
 
   public void notificarLiberacaoSC() throws IOException {
@@ -136,7 +136,7 @@ public class ProcessImp extends Thread {
           notificarAutorizacaoAcessoSC();
         }
 
-        if (messageReceived.contains(MENSAGEM_AUTORIZACAO_ACESSO_SC) && this.status == StatusType.WANTED) {
+        if ((messageReceived.contains(MENSAGEM_AUTORIZACAO_ACESSO_SC) || messageReceived.contains(MENSAGEM_LIBERACAO_SC)) && this.status == StatusType.WANTED) {
           this.numeroProcessosQueAutorizaramAcessoSC++;
           if (numeroProcessosQueAutorizaramAcessoSC >= 2) {
             this.status = StatusType.HELD;
@@ -153,6 +153,6 @@ public class ProcessImp extends Thread {
 
   public void run() {
     handleMulticastSocket();
-    handleUnicastSocket();
+    // handleUnicastSocket();
   }
 }
